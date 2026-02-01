@@ -1,0 +1,186 @@
+/* styles.css */
+
+html, body { height: 100%; }
+
+body{
+  margin:0;
+  font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+  background:#fbfbfb;
+  color:#111;
+}
+
+/* homework paper */
+.paper{
+  max-width:900px;
+  margin:40px auto;
+  padding:28px 30px;
+  background:#fff;
+  border:1px solid #e8e8e8;
+  border-radius:14px;
+  box-shadow:0 14px 35px rgba(0,0,0,0.06);
+  position: relative;
+  z-index: 2;
+}
+
+.topline{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  font-size:14px;
+  opacity:.9;
+}
+
+.rule{
+  border:0;
+  border-top:2px solid #111;
+  margin:14px 0 18px;
+}
+
+.problems{ padding-left:22px; }
+.problems p{ line-height:1.55; }
+.sub{ margin-left:18px; opacity:.95; }
+
+/* secret button */
+.secretWrap{
+  display:flex;
+  justify-content:center;
+  margin-top:26px;
+}
+
+.secretBtn{
+  border:1px solid #ddd;
+  background:#fff;
+  border-radius:999px;
+  padding:10px 18px;
+  font-size:14px;
+  cursor:pointer;
+  box-shadow:0 8px 16px rgba(0,0,0,0.06);
+  transition: transform 200ms ease, opacity 400ms ease;
+}
+
+.secretBtn:hover{ transform:translateY(-1px); }
+
+/* =====================================
+   CELEBRATION: pastel pink + images + text
+===================================== */
+
+/* full-screen pastel pink takeover */
+.celebrateOverlay{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:2000;
+  opacity:0;
+  transition: opacity 500ms ease;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 210, 230, 0.97), transparent 45%),
+    radial-gradient(circle at 80% 25%, rgba(255, 190, 220, 0.92), transparent 52%),
+    radial-gradient(circle at 40% 85%, rgba(255, 225, 240, 0.92), transparent 55%),
+    linear-gradient(180deg, rgba(255, 210, 235, 0.98), rgba(255, 175, 215, 0.98));
+}
+
+body.isCelebrating .celebrateOverlay{ opacity: 1; }
+
+body.isCelebrating .paper{
+  filter: drop-shadow(0 18px 30px rgba(255,105,180,0.18));
+}
+
+/* centered valentine text */
+.valentineText{
+  position: fixed;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%) translateY(14px);
+  z-index: 2150;
+  pointer-events: none;
+
+  opacity: 0;
+  transition: opacity 900ms ease, transform 1400ms cubic-bezier(.2,.85,.2,1);
+
+  font-family: ui-rounded, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 0.2px;
+
+  color: rgba(80, 18, 48, 0.92);
+  text-shadow: 0 12px 26px rgba(255, 105, 180, 0.24);
+}
+
+.valentineText .line1{
+  font-size: clamp(28px, 5.4vw, 60px);
+}
+
+.valentineText .line2{
+  margin-top: 10px;
+  font-size: clamp(14px, 2.2vw, 20px);
+  font-weight: 650;
+  opacity: 0.9;
+}
+
+body.isCelebrating .valentineText{
+  opacity: 1;
+  transform: translate(-50%, -50%) translateY(0);
+}
+
+/* cute images layer */
+.cuteLayer{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:2100;
+  opacity:1;
+}
+
+.cuteLayer img{
+  position:absolute;
+  opacity:0;
+  transform: translateY(22px) scale(0.95);
+  transition: opacity 1400ms ease, transform 1700ms cubic-bezier(.2,.85,.2,1);
+  filter: drop-shadow(0 14px 20px rgba(255, 105, 180, 0.22));
+  border-radius: 18px;
+}
+
+/* positions */
+.cuteLayer img.c1{ top: 6%; left: 6%; width: min(220px, 22vw); }
+.cuteLayer img.c2{ top: 10%; right: 7%; width: min(200px, 20vw); }
+.cuteLayer img.c3{ bottom: 8%; left: 10%; width: min(250px, 24vw); }
+.cuteLayer img.c4{ bottom: 7%; right: 10%; width: min(220px, 22vw); }
+
+/* slow, one-by-one fade-in (staggered) */
+body.isCelebrating .cuteLayer img{ opacity:1; transform: translateY(0) scale(1); }
+body.isCelebrating .cuteLayer img.c1{ transition-delay: 900ms; }
+body.isCelebrating .cuteLayer img.c2{ transition-delay: 1700ms; }
+body.isCelebrating .cuteLayer img.c3{ transition-delay: 2500ms; }
+body.isCelebrating .cuteLayer img.c4{ transition-delay: 3300ms; }
+
+/* particles */
+.pourLayer{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:2200;
+}
+
+.particle{
+  position:absolute;
+  left:0; top:0;
+  opacity:0;
+  will-change: transform, opacity;
+  user-select:none;
+  filter: drop-shadow(0 8px 14px rgba(255,105,180,0.25));
+}
+
+@media (prefers-reduced-motion: reduce){
+  .celebrateOverlay, .valentineText, .cuteLayer img{ transition:none !important; }
+  .particle{ display:none !important; }
+}
+
+.particle.heartP { width: 28px; height: 28px; }
+.particle.heartP img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 18px rgba(255, 105, 180, 0.28));
+}
